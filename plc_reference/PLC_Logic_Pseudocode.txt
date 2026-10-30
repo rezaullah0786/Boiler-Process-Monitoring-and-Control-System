@@ -1,0 +1,126 @@
+================================================================================
+BOILER PROCESS MONITORING AND CONTROL SYSTEM
+PLC LOGIC PSEUDOCODE, STRUCTURED TEXT (SCL), AND NETLIST SPECIFICATION
+Platform: Siemens TIA Portal V17 | SIMATIC S7-1200 | CPU 1214C DC/DC/DC
+================================================================================
+
+--------------------------------------------------------------------------------
+1. HIGH-LEVEL CYCLIC EXECUTION PSEUDOCODE
+--------------------------------------------------------------------------------
+
+PROGRAM_CYCLE Main_OB1
+BEGIN
+    // Step 1: Read Simulated Inputs from Memory
+    // Water_Level (%MD10) holds normalized level (0.0% to 100.0%)
+    // Low_Level_Threshold (%MD14) holds operator alarm trip point (e.g., 30.0%)
+
+    // Step 2: Core Low Water-Level Comparison
+    IF Water_Level < Low_Level_Threshold THEN
+        Low_Level_Alarm := TRUE;    // Drum water level has dropped below safety trip point
+    ELSE
+        Low_Level_Alarm := FALSE;   // Drum water level is normal or restored; clear alarm
+    END_IF;
+
+    // Step 3: [Extended Tier] Signal Boundary Validation
+    // Validate simulated process measurement
+    IF (Water_Level < 0.0) OR (Water_Level > 100.0) THEN
+        Water_Level_Input_Invalid := TRUE;
+    ELSE
+        Water_Level_Input_Invalid := FALSE;
+    END_IF;
+
+    // Validate operator setpoint configuration
+    IF (Low_Level_Threshold < 0.0) OR (Low_Level_Threshold > 100.0) THEN
+        Threshold_Configuration_Invalid := TRUE;
+    ELSE
+        Threshold_Configuration_Invalid := FALSE;
+    END_IF;
+
+END_PROGRAM_CYCLE;
+
+
+--------------------------------------------------------------------------------
+2. SIEMENS S7-1200 SCL (STRUCTURED CONTROL LANGUAGE) EQUIVALENT
+--------------------------------------------------------------------------------
+// The following SCL code is mathematically and logically equivalent to the
+// Ladder Diagram (LAD) implementation in TIA Portal V17.
+// It can be pasted directly into an SCL block in TIA Portal V17 if an SCL block is used.
+
+// --- CORE IMPLEMENTATION (Equivalent to Network 1 in LAD) ---
+"Low_Level_Alarm" := ("Water_Level" < "Low_Level_Threshold");
+
+// Note: In IEC 61131-3 SCL, the boolean expression evaluates to TRUE or FALSE
+// and is assigned in a single deterministic instruction without needing an IF-THEN branch.
+
+
+// --- EXTENDED IMPLEMENTATION (Equivalent to Networks 2 & 3 in LAD) ---
+// Water level measurement boundary check
+"Water_Level_Input_Invalid" := ("Water_Level" < 0.0) OR ("Water_Level" > 100.0);
+
+// Threshold configuration boundary check
+"Threshold_Configuration_Invalid" := ("Low_Level_Threshold" < 0.0) OR ("Low_Level_Threshold" > 100.0);
+
+
+--------------------------------------------------------------------------------
+3. FUNCTION BLOCK SCL IMPLEMENTATION ("FB_BoilerMonitoring")
+--------------------------------------------------------------------------------
+FUNCTION_BLOCK "FB_BoilerMonitoring"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      rWaterLevel : Real;             // Current measured drum water level (%)
+      rLowLevelThreshold : Real;      // Configured low-level trip threshold (%)
+   END_VAR
+
+   VAR_OUTPUT 
+      bLowLevelAlarm : Bool;          // Active low water level alarm state
+      bWaterLevelInvalid : Bool;      // Input water level out-of-range flag
+      bThresholdInvalid : Bool;       // Threshold setpoint out-of-range flag
+   END_VAR
+
+BEGIN
+   // 1. Core Comparison Logic
+   #bLowLevelAlarm := (#rWaterLevel < #rLowLevelThreshold);
+
+   // 2. Input Signal Validation
+   #bWaterLevelInvalid := (#rWaterLevel < 0.0) OR (#rWaterLevel > 100.0);
+
+   // 3. Threshold Configuration Validation
+   #bThresholdInvalid := (#rLowLevelThreshold < 0.0) OR (#rLowLevelThreshold > 100.0);
+END_FUNCTION_BLOCK
+
+
+--------------------------------------------------------------------------------
+4. TEXTUAL LADDER NETLIST (FOR MANUAL TIA PORTAL GRAPHICAL ENTRY)
+--------------------------------------------------------------------------------
+
+[NETWORK 1]
+TITLE = Boiler Drum Low Water-Level Detection
+COMMENT = Compares live Water_Level with Low_Level_Threshold and drives Low_Level_Alarm
+RUNG:
+  POWER_RAIL_LEFT
+  --[ CMP < ]-- (IN1: "Water_Level", IN2: "Low_Level_Threshold", TYPE: Real)
+  --[ ( ) ]---- (OPERAND: "Low_Level_Alarm")
+  POWER_RAIL_RIGHT
+
+[NETWORK 2 - EXTENDED]
+TITLE = Water Level Input Range Diagnostic Check
+COMMENT = Checks if Water_Level is outside valid physical boundary [0.0%, 100.0%]
+RUNG:
+  POWER_RAIL_LEFT
+  --+--[ CMP < ]-- (IN1: "Water_Level", IN2: 0.0, TYPE: Real)---+--[ ( ) ]-- ("Water_Level_Input_Invalid")
+    +--[ CMP > ]-- (IN1: "Water_Level", IN2: 100.0, TYPE: Real)-+
+  POWER_RAIL_RIGHT
+
+[NETWORK 3 - EXTENDED]
+TITLE = Threshold Configuration Range Diagnostic Check
+COMMENT = Checks if Low_Level_Threshold is outside reasonable boundary [0.0%, 100.0%]
+RUNG:
+  POWER_RAIL_LEFT
+  --+--[ CMP < ]-- (IN1: "Low_Level_Threshold", IN2: 0.0, TYPE: Real)---+--[ ( ) ]-- ("Threshold_Configuration_Invalid")
+    +--[ CMP > ]-- (IN1: "Low_Level_Threshold", IN2: 100.0, TYPE: Real)-+
+  POWER_RAIL_RIGHT
+
+================================================================================
+END OF SPECIFICATION
+================================================================================

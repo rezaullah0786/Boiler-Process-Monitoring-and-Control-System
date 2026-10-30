@@ -1,0 +1,205 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 850" width="100%" height="100%" style="background:#0f172a; font-family:'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#0369a1" />
+    </linearGradient>
+    <linearGradient id="simCardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="plcCardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a5f" />
+      <stop offset="100%" stop-color="#0c2340" />
+    </linearGradient>
+    <linearGradient id="cmpGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0369a1" />
+      <stop offset="100%" stop-color="#075985" />
+    </linearGradient>
+    <linearGradient id="alarmGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b91c1c" />
+      <stop offset="100%" stop-color="#991b1b" />
+    </linearGradient>
+    <linearGradient id="futureGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2d1a45" />
+      <stop offset="100%" stop-color="#190e2b" />
+    </linearGradient>
+
+    <!-- Arrow Marker -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#38bdf8" />
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#fbbf24" />
+    </marker>
+    <marker id="arrow-future" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#a855f7" />
+    </marker>
+
+    <!-- Drop Shadows -->
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.5" />
+    </filter>
+  </defs>
+
+  <!-- Title Banner -->
+  <rect x="30" y="25" width="1040" height="75" rx="10" fill="url(#headerGrad)" filter="url(#shadow)" />
+  <text x="50" y="60" fill="#ffffff" font-size="22" font-weight="700" letter-spacing="0.5">BOILER PROCESS MONITORING &amp; CONTROL SYSTEM</text>
+  <text x="50" y="85" fill="#bae6fd" font-size="14">Educational Siemens TIA Portal V17 &amp; S7-PLCSIM Architecture | SIMATIC S7-1200 Ladder Diagram</text>
+  <rect x="910" y="42" width="140" height="38" rx="6" fill="#0c4a6e" stroke="#38bdf8" stroke-width="1.5" />
+  <text x="980" y="66" fill="#38bdf8" font-size="12" font-weight="700" text-anchor="middle">SIMULATION ONLY</text>
+
+  <!-- ================= LEFT COLUMN: SIMULATION LAYER ================= -->
+  <g id="SimulationLayer">
+    <rect x="30" y="125" width="280" height="420" rx="12" fill="url(#simCardGrad)" stroke="#334155" stroke-width="1.5" filter="url(#shadow)" />
+    <rect x="30" y="125" width="280" height="42" rx="12" fill="#1e293b" />
+    <text x="170" y="152" fill="#94a3b8" font-size="14" font-weight="700" text-anchor="middle">1. SIMULATION STIMULUS</text>
+
+    <!-- Simulated Input Box -->
+    <rect x="50" y="195" width="240" height="110" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5" />
+    <text x="170" y="223" fill="#38bdf8" font-size="14" font-weight="700" text-anchor="middle">Simulated Water-Level Input</text>
+    <text x="170" y="246" fill="#cbd5e1" font-size="12" text-anchor="middle">TIA Portal Watch Table / PLCSIM</text>
+    <rect x="80" y="258" width="180" height="32" rx="5" fill="#0f172a" stroke="#475569" />
+    <text x="170" y="279" fill="#38bdf8" font-size="13" font-family="'Consolas', monospace" font-weight="bold" text-anchor="middle">Modify: 0.0 - 100.0%</text>
+
+    <!-- Threshold Input Box -->
+    <rect x="50" y="340" width="240" height="110" rx="8" fill="#1e293b" stroke="#fbbf24" stroke-width="1.5" />
+    <text x="170" y="368" fill="#fbbf24" font-size="14" font-weight="700" text-anchor="middle">Configurable Low Threshold</text>
+    <text x="170" y="391" fill="#cbd5e1" font-size="12" text-anchor="middle">Operator Setpoint Input</text>
+    <rect x="80" y="403" width="180" height="32" rx="5" fill="#0f172a" stroke="#475569" />
+    <text x="170" y="424" fill="#fbbf24" font-size="13" font-family="'Consolas', monospace" font-weight="bold" text-anchor="middle">Default: 30.0%</text>
+
+    <!-- Boundary Notice -->
+    <rect x="50" y="475" width="240" height="50" rx="6" fill="#0f172a" stroke="#475569" stroke-dasharray="4" />
+    <text x="170" y="496" fill="#94a3b8" font-size="11" text-anchor="middle">No Physical Sensors Connected</text>
+    <text x="170" y="513" fill="#64748b" font-size="10" text-anchor="middle">Manual Stimulus Injection Only</text>
+  </g>
+
+  <!-- Arrow: Sim Input -> PLC Tag Water_Level -->
+  <path d="M 290 250 L 370 250" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arrow)" />
+
+  <!-- Arrow: Threshold Input -> PLC Tag Low_Level_Threshold -->
+  <path d="M 290 395 L 370 395" fill="none" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#arrow-amber)" />
+
+  <!-- ================= CENTER COLUMN: SIEMENS S7-1200 PLC ================= -->
+  <g id="PLCLayer">
+    <rect x="370" y="125" width="370" height="420" rx="12" fill="url(#plcCardGrad)" stroke="#0284c7" stroke-width="2" filter="url(#shadow)" />
+    <rect x="370" y="125" width="370" height="42" rx="12" fill="#0369a1" />
+    <text x="555" y="152" fill="#ffffff" font-size="14" font-weight="700" text-anchor="middle">2. SIMATIC S7-1200 PLC RUNTIME [OB1]</text>
+
+    <!-- Tag Water_Level -->
+    <rect x="390" y="215" width="130" height="65" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5" />
+    <text x="455" y="238" fill="#e2e8f0" font-size="11" font-weight="700" text-anchor="middle">PLC Tag</text>
+    <text x="455" y="254" fill="#38bdf8" font-size="12" font-family="'Consolas', monospace" font-weight="bold" text-anchor="middle">"Water_Level"</text>
+    <text x="455" y="270" fill="#94a3b8" font-size="10" text-anchor="middle">%MD10 | REAL</text>
+
+    <!-- Tag Low_Level_Threshold -->
+    <rect x="390" y="360" width="130" height="65" rx="6" fill="#0f172a" stroke="#fbbf24" stroke-width="1.5" />
+    <text x="455" y="383" fill="#e2e8f0" font-size="11" font-weight="700" text-anchor="middle">PLC Tag</text>
+    <text x="455" y="399" fill="#fbbf24" font-size="11" font-family="'Consolas', monospace" font-weight="bold" text-anchor="middle">"Low_Level_Threshold"</text>
+    <text x="455" y="415" fill="#94a3b8" font-size="10" text-anchor="middle">%MD14 | REAL</text>
+
+    <!-- REAL Comparison Box (CMP <) -->
+    <rect x="560" y="260" width="160" height="150" rx="8" fill="url(#cmpGrad)" stroke="#38bdf8" stroke-width="2" />
+    <text x="640" y="285" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">CMP &lt;</text>
+    <text x="640" y="302" fill="#bae6fd" font-size="11" text-anchor="middle">Real Comparison</text>
+    <line x1="560" y1="312" x2="720" y2="312" stroke="#0284c7" stroke-width="1.5" />
+
+    <text x="575" y="337" fill="#cbd5e1" font-size="11">IN1:</text>
+    <text x="615" y="337" fill="#38bdf8" font-size="11" font-family="'Consolas', monospace">Water_Level</text>
+
+    <text x="575" y="368" fill="#cbd5e1" font-size="11">IN2:</text>
+    <text x="615" y="368" fill="#fbbf24" font-size="11" font-family="'Consolas', monospace">Threshold</text>
+
+    <rect x="580" y="385" width="120" height="18" rx="3" fill="#082f49" />
+    <text x="640" y="398" fill="#7dd3fc" font-size="10" text-anchor="middle">Logic: IN1 &lt; IN2</text>
+
+    <!-- Connectors inside PLC -->
+    <!-- Water_Level to IN1 -->
+    <path d="M 520 248 L 540 248 L 540 334 L 560 334" fill="none" stroke="#38bdf8" stroke-width="1.8" />
+    <!-- Threshold to IN2 -->
+    <path d="M 520 392 L 540 392 L 540 365 L 560 365" fill="none" stroke="#fbbf24" stroke-width="1.8" />
+
+    <!-- Cyclic Scan annotation -->
+    <rect x="390" y="475" width="330" height="50" rx="6" fill="#082f49" stroke="#0284c7" stroke-dasharray="3" />
+    <text x="555" y="496" fill="#38bdf8" font-size="11" font-weight="bold" text-anchor="middle">OB1 Cyclic Execution (1 Scan = Read -> Solve -> Write)</text>
+    <text x="555" y="514" fill="#94a3b8" font-size="10" text-anchor="middle">Continuously evaluated every ~1-5 ms in S7-PLCSIM</text>
+  </g>
+
+  <!-- Arrow: Comparison Output to Alarm Logic -->
+  <path d="M 720 335 L 800 335" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arrow)" />
+  <text x="760" y="325" fill="#38bdf8" font-size="10" font-weight="bold" text-anchor="middle">RLO Flow</text>
+
+  <!-- ================= RIGHT COLUMN: ALARM OUTPUT ================= -->
+  <g id="AlarmLayer">
+    <rect x="800" y="125" width="270" height="420" rx="12" fill="url(#simCardGrad)" stroke="#334155" stroke-width="1.5" filter="url(#shadow)" />
+    <rect x="800" y="125" width="270" height="42" rx="12" fill="#1e293b" />
+    <text x="935" y="152" fill="#94a3b8" font-size="14" font-weight="700" text-anchor="middle">3. PROCESS ALARM OUTPUT</text>
+
+    <!-- Ladder Coil Box -->
+    <rect x="825" y="215" width="220" height="100" rx="8" fill="#1e293b" stroke="#f87171" stroke-width="1.5" />
+    <text x="935" y="243" fill="#f87171" font-size="14" font-weight="bold" text-anchor="middle">Ladder Assignment Coil</text>
+    <text x="935" y="270" fill="#ffffff" font-size="20" font-family="'Consolas', monospace" font-weight="bold" text-anchor="middle">-( )</text>
+    <text x="935" y="295" fill="#94a3b8" font-size="11" text-anchor="middle">Non-Latching Assignment</text>
+
+    <!-- Alarm Tag Box -->
+    <rect x="825" y="340" width="220" height="110" rx="8" fill="url(#alarmGrad)" stroke="#ef4444" stroke-width="2" filter="url(#shadow)" />
+    <text x="935" y="368" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">PLC Boolean Alarm Tag</text>
+    <text x="935" y="392" fill="#fef08a" font-size="14" font-family="'Consolas', monospace" font-weight="bold" text-anchor="middle">"Low_Level_Alarm"</text>
+    <text x="935" y="412" fill="#fca5a5" font-size="11" text-anchor="middle">Address: %M0.0 | BOOL</text>
+    <text x="935" y="432" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">TRUE = ACTIVE | FALSE = CLEAR</text>
+
+    <!-- Connector: Coil to Tag -->
+    <path d="M 935 315 L 935 340" fill="none" stroke="#f87171" stroke-width="2" marker-end="url(#arrow)" />
+
+    <!-- Alarm Note -->
+    <rect x="825" y="475" width="220" height="50" rx="6" fill="#0f172a" stroke="#475569" stroke-dasharray="4" />
+    <text x="935" y="496" fill="#94a3b8" font-size="11" text-anchor="middle">Automatic Clearing:</text>
+    <text x="935" y="513" fill="#64748b" font-size="10" text-anchor="middle">Resets when Level &gt;= Threshold</text>
+  </g>
+
+  <!-- ================= BOTTOM SECTION: FUTURE EXTENSIONS ================= -->
+  <g id="FutureExtensions">
+    <rect x="30" y="575" width="1040" height="245" rx="12" fill="url(#futureGrad)" stroke="#6b21a8" stroke-width="2" stroke-dasharray="6" filter="url(#shadow)" />
+    <rect x="30" y="575" width="1040" height="38" rx="12" fill="#3b0764" />
+    <text x="550" y="600" fill="#d8b4fe" font-size="14" font-weight="700" text-anchor="middle">4. OPTIONAL FUTURE EXTENSIONS &amp; INTEGRATION (CONCEPTUAL / NOT IMPLEMENTED IN CORE)</text>
+
+    <!-- PROFINET / Industrial Ethernet Bus -->
+    <rect x="50" y="630" width="310" height="170" rx="8" fill="#1e1035" stroke="#a855f7" stroke-width="1.2" />
+    <text x="205" y="655" fill="#e9d5ff" font-size="13" font-weight="bold" text-anchor="middle">A. Input Validation Tier [Extended]</text>
+    <text x="205" y="680" fill="#cbd5e1" font-size="11" text-anchor="middle">Diagnostic Flags for Signal Boundaries:</text>
+    <rect x="70" y="695" width="270" height="30" rx="4" fill="#0f172a" stroke="#475569" />
+    <text x="205" y="715" fill="#fca5a5" font-size="10" font-family="'Consolas', monospace" text-anchor="middle">Water_Level_Input_Invalid (%M0.1)</text>
+    <rect x="70" y="735" width="270" height="30" rx="4" fill="#0f172a" stroke="#475569" />
+    <text x="205" y="755" fill="#fca5a5" font-size="10" font-family="'Consolas', monospace" text-anchor="middle">Threshold_Configuration_Invalid (%M0.2)</text>
+    <text x="205" y="785" fill="#94a3b8" font-size="10" text-anchor="middle">Detects values &lt; 0.0% or &gt; 100.0%</text>
+
+    <!-- HMI/SCADA Integration -->
+    <rect x="395" y="630" width="310" height="170" rx="8" fill="#1e1035" stroke="#a855f7" stroke-width="1.2" />
+    <text x="550" y="655" fill="#e9d5ff" font-size="13" font-weight="bold" text-anchor="middle">B. HMI / SCADA Visualization</text>
+    <text x="550" y="678" fill="#cbd5e1" font-size="11" text-anchor="middle">Industrial Ethernet (PROFINET / S7 Protocol):</text>
+    <rect x="415" y="690" width="270" height="24" rx="4" fill="#0f172a" />
+    <text x="550" y="706" fill="#38bdf8" font-size="10" text-anchor="middle">Bar Graph: Live Water Level (0-100%)</text>
+    <rect x="415" y="720" width="270" height="24" rx="4" fill="#0f172a" />
+    <text x="550" y="736" fill="#f87171" font-size="10" text-anchor="middle">Alarm Banner: Flashing Red Banner</text>
+    <rect x="415" y="750" width="270" height="24" rx="4" fill="#0f172a" />
+    <text x="550" y="766" fill="#fbbf24" font-size="10" text-anchor="middle">I/O Field: Operator Setpoint Adjustment</text>
+    <text x="550" y="790" fill="#94a3b8" font-size="9" text-anchor="middle">(Future: WinCC Unified / Ignition / FactoryTalk)</text>
+
+    <!-- Pump Control Simulation -->
+    <rect x="740" y="630" width="310" height="170" rx="8" fill="#1e1035" stroke="#a855f7" stroke-width="1.2" />
+    <text x="895" y="655" fill="#e9d5ff" font-size="13" font-weight="bold" text-anchor="middle">C. Feedwater Pump Control &amp; Trip</text>
+    <text x="895" y="678" fill="#cbd5e1" font-size="11" text-anchor="middle">Closed-Loop Automatic Control Logic:</text>
+    <rect x="760" y="690" width="270" height="24" rx="4" fill="#0f172a" />
+    <text x="895" y="706" fill="#4ade80" font-size="10" text-anchor="middle">Pump Start: Level &lt; Low Setpoint</text>
+    <rect x="760" y="720" width="270" height="24" rx="4" fill="#0f172a" />
+    <text x="895" y="736" fill="#fbbf24" font-size="10" text-anchor="middle">Pump Stop: Level &gt; High Setpoint</text>
+    <rect x="760" y="750" width="270" height="24" rx="4" fill="#0f172a" />
+    <text x="895" y="766" fill="#f87171" font-size="10" text-anchor="middle">Interlock: Burner Cutoff on Extreme Low</text>
+    <text x="895" y="790" fill="#94a3b8" font-size="9" text-anchor="middle">(Requires safety-certified hardware in industry)</text>
+
+    <!-- Communication Arrow between PLC and Future Extensions -->
+    <path d="M 555 545 L 555 575" fill="none" stroke="#a855f7" stroke-width="2" stroke-dasharray="4" marker-end="url(#arrow-future)" />
+  </g>
+</svg>

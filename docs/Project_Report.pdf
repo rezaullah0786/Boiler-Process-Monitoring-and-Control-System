@@ -1,0 +1,127 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 3 0 R /Outlines 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Outlines /Count 0 >>
+endobj
+3 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R] /Count 3 >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /Name /F1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /Name /F2 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+6 0 obj
+<< /Type /Page /Parent 3 0 R /MediaBox [0 0 612 792] /Contents 7 0 R /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> >>
+endobj
+7 0 obj
+<< /Length 1918 >>
+stream
+BT /F2 24 Tf 50 720 Td (BOILER PROCESS MONITORING & CONTROL SYSTEM) Tj ET
+BT /F1 14 Tf 50 690 Td (Using Siemens TIA Portal V17 and Ladder Logic) Tj ET
+BT /F1 11 Tf 50 660 Td (Engineering Project Dossier & Educational Reference Model) Tj ET
+BT /F2 12 Tf 50 580 Td (PROJECT METADATA) Tj ET
+BT /F1 10 Tf 50 555 Td (Platform: Siemens TIA Portal V17 | SIMATIC S7-1200 | S7-PLCSIM V17) Tj ET
+BT /F1 10 Tf 50 535 Td (Language: Ladder Diagram [LAD / KOP] - IEC 61131-3) Tj ET
+BT /F1 10 Tf 50 515 Td (Target Controller: CPU 1214C DC/DC/DC - 6ES7 214-1AG40-0XB0 - FW V4.5) Tj ET
+BT /F1 10 Tf 50 495 Td (Scope: Deterministic Boiler Drum Level Monitoring & Alarm Annunciation) Tj ET
+BT /F1 10 Tf 50 475 Td (Status: Complete Engineering Specification & Simulation Model) Tj ET
+BT /F2 12 Tf 50 400 Td (EXECUTIVE ABSTRACT) Tj ET
+BT /F1 10 Tf 50 375 Td (This project establishes an educational, simulated PLC-based boiler drum water-level) Tj ET
+BT /F1 10 Tf 50 360 Td (monitoring and alarm system engineered in Siemens TIA Portal V17.) Tj ET
+BT /F1 10 Tf 50 340 Td (A simulated drum water level variable [Water_Level, REAL, 0.0% to 100.0%] is cyclically) Tj ET
+BT /F1 10 Tf 50 325 Td (compared against a configurable low-level trip threshold [Low_Level_Threshold, REAL, 30.0%]) Tj ET
+BT /F1 10 Tf 50 310 Td (using a Siemens CMP < comparator instruction in Main [OB1].) Tj ET
+BT /F1 10 Tf 50 290 Td (When the water level drops strictly below the threshold, a non-latching Boolean alarm) Tj ET
+BT /F1 10 Tf 50 275 Td ([Low_Level_Alarm, BOOL] activates. The alarm automatically clears upon level recovery.) Tj ET
+BT /F1 10 Tf 50 255 Td (A supervisory diagnostic tier flags out-of-range sensor and setpoint values. The full) Tj ET
+BT /F1 10 Tf 50 240 Td (design is verified through a 10-point test matrix in S7-PLCSIM with Watch Tables.) Tj ET
+BT /F1 9 Tf 50 80 Td (Document Page 1 | Siemens TIA Portal V17 Reference Specification) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 3 0 R /MediaBox [0 0 612 792] /Contents 9 0 R /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> >>
+endobj
+9 0 obj
+<< /Length 2551 >>
+stream
+BT /F2 16 Tf 50 740 Td (1. PLC TAG ARCHITECTURE & MEMORY MAPPING) Tj ET
+BT /F1 10 Tf 50 715 Td (The controller utilizes symbolic addressing mapped to deterministic S7-1200 memory offsets:) Tj ET
+BT /F2 10 Tf 50 685 Td (Tag Name             Address   Type    Initial Value   Functional Purpose) Tj ET
+BT /F1 9 Tf 50 665 Td (Water_Level          %MD10     Real    60.0            Simulated drum water level [0.0% - 100.0%]) Tj ET
+BT /F1 9 Tf 50 645 Td (Low_Level_Threshold %MD14     Real    30.0            Configurable low water alarm trip setpoint) Tj ET
+BT /F1 9 Tf 50 625 Td (Low_Level_Alarm     %M0.0     Bool    FALSE           Discrete low water alarm output indicator) Tj ET
+BT /F1 9 Tf 50 605 Td (Water_Level_Invalid %M0.1     Bool    FALSE           [Extended] Diagnostic flag for level out-of-bounds) Tj ET
+BT /F1 9 Tf 50 585 Td (Threshold_Invalid   %M0.2     Bool    FALSE           [Extended] Diagnostic flag for threshold out-of-bounds) Tj ET
+BT /F2 11 Tf 50 545 Td (Critical Memory Rule: 4-Byte Allocation for REAL Variables) Tj ET
+BT /F1 10 Tf 50 525 Td (A REAL data type occupies 32 bits [4 contiguous bytes] conforming to IEEE 754.) Tj ET
+BT /F1 10 Tf 50 510 Td (%MD10 spans bytes %MB10, %MB11, %MB12, %MB13. The next available address is %MD14.) Tj ET
+BT /F1 10 Tf 50 495 Td (Allocating %MD12 would overlap bytes 12 and 13, causing severe data corruption.) Tj ET
+BT /F2 16 Tf 50 450 Td (2. LADDER DIAGRAM [LAD] NETWORK SPECIFICATION) Tj ET
+BT /F2 11 Tf 50 425 Td (Network 1: Low Water-Level Detection & Alarm Assignment) Tj ET
+BT /F1 10 Tf 50 405 Td (Ladder Rung Representation:) Tj ET
+BT /F1 9 Tf 50 380 Td (  Left Rail ----------------[ CMP < ]-------------------( )---------------- Right Rail) Tj ET
+BT /F1 9 Tf 50 365 Td (                            |  Real  |             Low_Level_Alarm) Tj ET
+BT /F1 9 Tf 50 350 Td (    Water_Level ---------->| IN1    |                 %M0.0) Tj ET
+BT /F1 9 Tf 50 335 Td (    Low_Level_Threshold -->| IN2    |) Tj ET
+BT /F1 10 Tf 50 300 Td (Evaluation Mechanics:) Tj ET
+BT /F1 10 Tf 50 280 Td (- When Water_Level < Low_Level_Threshold evaluates to TRUE, power flow passes to coil.) Tj ET
+BT /F1 10 Tf 50 265 Td (- The coil -( )- writes 1 [TRUE] to %M0.0.) Tj ET
+BT /F1 10 Tf 50 250 Td (- When Water_Level >= Low_Level_Threshold evaluates to FALSE, power flow is interrupted.) Tj ET
+BT /F1 10 Tf 50 235 Td (- The standard coil -( )- writes 0 [FALSE] to %M0.0, automatically clearing the alarm.) Tj ET
+BT /F1 9 Tf 50 80 Td (Document Page 2 | Siemens TIA Portal V17 Reference Specification) Tj ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 3 0 R /MediaBox [0 0 612 792] /Contents 11 0 R /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> >>
+endobj
+11 0 obj
+<< /Length 2698 >>
+stream
+BT /F2 16 Tf 50 740 Td (3. VERIFICATION TEST MATRIX & RESULTS) Tj ET
+BT /F1 10 Tf 50 715 Td (The logic is verified across 10 deterministic test cases in Siemens S7-PLCSIM:) Tj ET
+BT /F2 9 Tf 50 685 Td (Test ID   Water_Level   Threshold   Logic Expression         Expected Alarm   Behavior Category) Tj ET
+BT /F1 9 Tf 50 665 Td (TC-01     80.0%         30.0%       80.0 < 30.0 -> FALSE     FALSE            High Normal Operating Level) Tj ET
+BT /F1 9 Tf 50 645 Td (TC-02     60.0%         30.0%       60.0 < 30.0 -> FALSE     FALSE            Mid-Range Operating Level) Tj ET
+BT /F1 9 Tf 50 625 Td (TC-03     30.0%         30.0%       30.0 < 30.0 -> FALSE     FALSE            Boundary: Level == Threshold) Tj ET
+BT /F1 9 Tf 50 605 Td (TC-04     29.9%         30.0%       29.9 < 30.0 -> TRUE      TRUE             Boundary: 0.1% Sub-threshold) Tj ET
+BT /F1 9 Tf 50 585 Td (TC-05     20.0%         30.0%       20.0 < 30.0 -> TRUE      TRUE             Standard Low-Level Trip) Tj ET
+BT /F1 9 Tf 50 565 Td (TC-06      0.0%         30.0%        0.0 < 30.0 -> TRUE      TRUE             Dry Drum Condition) Tj ET
+BT /F1 9 Tf 50 545 Td (TC-07     45.0%         30.0%       45.0 < 30.0 -> FALSE     FALSE            Recovery Test [Auto-clears]) Tj ET
+BT /F1 9 Tf 50 525 Td (TC-08     25.0%         40.0%       25.0 < 40.0 -> TRUE      TRUE             Dynamic Setpoint Adjustment) Tj ET
+BT /F1 9 Tf 50 505 Td (TC-09     50.0%         40.0%       50.0 < 40.0 -> FALSE     FALSE            Dynamic Setpoint Safe Level) Tj ET
+BT /F1 9 Tf 50 485 Td (TC-10     20.0%         20.0%       20.0 < 20.0 -> FALSE     FALSE            Boundary: Setpoint == Level) Tj ET
+BT /F2 16 Tf 50 435 Td (4. INTERVIEW HIGHLIGHTS & RESUME INTEGRITY) Tj ET
+BT /F2 10 Tf 50 410 Td (Key Interview Defense Points:) Tj ET
+BT /F1 9 Tf 50 390 Td (1. Why REAL instead of INT? Analog process values are continuous decimals. INT would) Tj ET
+BT /F1 9 Tf 50 375 Td (   truncate 29.9% to 29 or 30, eliminating sub-percentage precision near critical limits.) Tj ET
+BT /F1 9 Tf 50 355 Td (2. Equal-to-threshold behavior: CMP < strictly evaluates inequality. 30.0 < 30.0 is FALSE.) Tj ET
+BT /F1 9 Tf 50 335 Td (3. Non-latching vs Latching: Advisory alarms automatically clear when condition clears.) Tj ET
+BT /F1 9 Tf 50 320 Td (   Emergency shutdown trips [which cut fuel] must latch until manual operator reset.) Tj ET
+BT /F1 9 Tf 50 300 Td (4. Scope & Honesty: This project is an educational PLC simulation. It does not claim) Tj ET
+BT /F1 9 Tf 50 285 Td (   physical sensor wiring or certified safety-instrumented system [SIS] deployment.) Tj ET
+BT /F1 9 Tf 50 80 Td (Document Page 3 | Siemens TIA Portal V17 Reference Specification) Tj ET
+endstream
+endobj
+xref
+0 12
+0000000000 65535 f 
+0000000009 00000 n 
+0000000074 00000 n 
+0000000120 00000 n 
+0000000190 00000 n 
+0000000297 00000 n 
+0000000409 00000 n 
+0000000545 00000 n 
+0000002515 00000 n 
+0000002651 00000 n 
+0000005254 00000 n 
+0000005392 00000 n 
+trailer
+<< /Size 12 /Root 1 0 R >>
+startxref
+8143
+%%EOF
